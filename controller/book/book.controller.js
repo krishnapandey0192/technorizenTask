@@ -39,7 +39,13 @@ export const createBook = async (req, res) => {
 
 export const getAllBooks = async (req, res) => {
   try {
-    const books = await Book.find({ isDeleted: false });
+    const { userId, category, subcategory } = req.query;
+    const filter = { isDeleted: false };
+    if (userId) filter.userId = userId;
+    if (category) filter.category = category;
+    if (subcategory) filter.subcategory = subcategory;
+
+    const books = await Book.find(filter).sort({ title: 1 });
     if (!books || books.length === 0) {
       return sendResponse(res, false, 404, "No books found", null);
     }
