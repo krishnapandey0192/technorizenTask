@@ -19,13 +19,13 @@ export const environmentConfig = {
       ? process.env.DEV_JWT_SECRET
       : process.env.PRD_JWT_SECRET,
 
-  //   adminEmail:
-  //     NODE_ENV === "DEVELOPMENT"
-  //       ? process.env.ADMIN_EMAIL
-  //       : process.env.ADMIN_EMAIL,
+    adminEmail:
+      NODE_ENV === "DEVELOPMENT"
+        ? process.env.ADMIN_EMAIL
+        : process.env.ADMIN_EMAIL,
 
-  //   adminPassword:
-  //     NODE_ENV === "DEVELOPMENT"
-  //       ? process.env.ADMIN_PASSWORD
-  //       : process.env.ADMIN_PASSWORD,
+    adminPassword:
+      NODE_ENV === "DEVELOPMENT"
+        ? process.env.ADMIN_PASSWORD
+        : process.env.ADMIN_PASSWORD,
 };

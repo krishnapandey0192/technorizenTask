@@ -2,21 +2,12 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      enum: ["Mr", "Mrs", "Miss"],
-      required: true,
-    },
     name: {
       type: String,
       required: true,
       trim: true,
     },
-    phone: {
-      type: String,
-      required: true,
-      unique: true,
-    },
+
     email: {
       type: String,
       required: true,
@@ -31,15 +22,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       minlength: 8,
-      maxlength: 15,
     },
-    address: {
-      street: { type: String, trim: true },
-      city: { type: String, trim: true },
-      pincode: {
-        type: String,
-        trim: true,
-      },
+    role: {
+      type: String,
+      enum: ["admin", "employee"],
+      default: "employee",
     },
     createdAt: {
       type: Date,

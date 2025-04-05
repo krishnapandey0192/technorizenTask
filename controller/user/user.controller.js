@@ -6,8 +6,8 @@ import { environmentConfig } from "../../config/environmentConfig.js";
 
 export const userSignUp = async (req, res) => {
   try {
-    const { title, name, phone, email, password } = req.body;
-    if (!title || !name || !phone || !email || !password) {
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
       return sendResponse(res, false, 400, "All feilds are requred", null);
     }
 
@@ -20,16 +20,9 @@ export const userSignUp = async (req, res) => {
     // const hsashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await userModel.create({
-      title,
       name,
       email,
-      phone,
       password,
-      address: {
-        street: req.body.street,
-        city: req.body.city,
-        pincode: req.body.pincode,
-      },
     });
     newUser.password = undefined;
 
@@ -60,8 +53,7 @@ export const userSignIn = async (req, res) => {
     if (!user) {
       return sendResponse(res, false, 400, "User does not exist", null);
     }
-    // const comparePassword = bcrypt.compare(password, user.password);
-    const comparePassword = password === user.password;
+    const comparePassword = bcrypt.compare(password, user.password);
 
     if (!comparePassword) {
       return sendResponse(res, false, 400, "Invalid email or password", null);
@@ -84,3 +76,16 @@ export const userSignIn = async (req, res) => {
     return sendResponse(res, false, 500, "Internal Server Error", null);
   }
 };
+
+export const getAllEmployee = async(req,res)=>{
+  try {
+  const employees = await userModel.find({ role: "employee" }).select("-password");
+  if(!employees){
+   return sendResponse(res,false,403,"Employee not found",null)
+  }
+  return sendResponse(res,true,200,"Employee fetch successfully",employees)
+    
+  } catch (error) {
+ return   sendResponse(res,false,500,"Internal Server Error",null)
+  }
+} 
