@@ -1,6 +1,7 @@
 import { sendResponse } from "../../utils/sendResponse.js";
 import Task from "../../model/task/task.model.js";
 
+// create task controller
 export const createTask = async (req, res) => {
   try {
     const task = new Task(req.body);
