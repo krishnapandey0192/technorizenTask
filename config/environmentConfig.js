@@ -1,6 +1,6 @@
 import { configDotenv } from "dotenv";
 configDotenv();
-
+// enviorement setup
 const NODE_ENV = process.env.Node_ENV;
 
 export const environmentConfig = {
